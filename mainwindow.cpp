@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowFlags(Qt::Window | Qt::MSWindowsFixedSizeDialogHint);
     this->statusBar()->setSizeGripEnabled(false);
+    ui->controllerStatus->setReadOnly(true);
+    ui->controllerStatus->setText("Displaying Raw Data");
 }
 
 MainWindow::~MainWindow()

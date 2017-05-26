@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Load Cell Measurement</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QGroupBox" name="groupBox">
@@ -305,7 +305,7 @@ QGroupBox::title {
        <widget class="QLineEdit" name="lineEdit_7"/>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_7">
+       <widget class="QPushButton" name="portSelectButton">
         <property name="text">
          <string>Select Port</string>
         </property>
@@ -479,7 +479,7 @@ QGroupBox::title {
       <string>Controller is </string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_8">
+    <widget class="QLineEdit" name="controllerStatus">
      <property name="geometry">
       <rect>
        <x>70</x>
