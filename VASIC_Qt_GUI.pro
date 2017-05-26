@@ -24,8 +24,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    calibrationwindow.cpp \
+    taredialog.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    calibrationwindow.h \
+    taredialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    calibrationwindow.ui \
+    taredialog.ui
