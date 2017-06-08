@@ -5,6 +5,13 @@
 #include "taredialog.h"
 #include "calibrationwindow.h"
 
+#include <QApplication>
+#include <QWidget>
+#include <QVBoxLayout>
+#include <QLabel>
+#include <QScrollArea>
+#include <QtSerialPort/QSerialPortInfo>
+
 namespace Ui {
 class MainWindow;
 }

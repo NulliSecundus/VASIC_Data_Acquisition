@@ -3,6 +3,16 @@
 #include "calibrationwindow.h"
 #include "taredialog.h"
 
+#include <QApplication>
+#include <QWidget>
+#include <QVBoxLayout>
+#include <QLabel>
+#include <QScrollArea>
+#include <QtSerialPort>
+#include <QSerialPortInfo>
+
+QT_USE_NAMESPACE
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
