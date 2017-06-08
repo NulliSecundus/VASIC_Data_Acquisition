@@ -31,10 +31,13 @@ private slots:
 
     void on_tareButton_clicked();
 
+    void on_portSelectButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     taredialog *t;
     CalibrationWindow *calibrateWindow;
+    QScrollArea area;
 };
 
 #endif // MAINWINDOW_H

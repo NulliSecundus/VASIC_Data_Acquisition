@@ -50,7 +50,7 @@ QGroupBox::title {
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
-       <widget class="QPushButton" name="pushButton_5">
+       <widget class="QPushButton" name="sessionStartButton">
         <property name="text">
          <string>Start</string>
         </property>
@@ -70,7 +70,7 @@ QGroupBox::title {
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_6">
+       <widget class="QPushButton" name="sessionStopButton">
         <property name="text">
          <string>Stop</string>
         </property>
@@ -332,7 +332,7 @@ QGroupBox::title {
          <widget class="QLineEdit" name="lineEdit_5"/>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_3">
+         <widget class="QPushButton" name="selectTimeButton">
           <property name="text">
            <string>Select Time</string>
           </property>
@@ -353,7 +353,7 @@ QGroupBox::title {
          <widget class="QLineEdit" name="lineEdit_6"/>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_4">
+         <widget class="QPushButton" name="selectFileButton">
           <property name="text">
            <string>Select File</string>
           </property>
