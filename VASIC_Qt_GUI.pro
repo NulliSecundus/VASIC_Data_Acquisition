@@ -28,12 +28,15 @@ target.path = $$[QT_INSTALL_EXAMPLES]/serialport/enumerator
 SOURCES += main.cpp\
         mainwindow.cpp \
     calibrationwindow.cpp \
-    taredialog.cpp
+    taredialog.cpp \
+    selectport.cpp
 
 HEADERS  += mainwindow.h \
     calibrationwindow.h \
-    taredialog.h
+    taredialog.h \
+    selectport.h
 
 FORMS    += mainwindow.ui \
     calibrationwindow.ui \
-    taredialog.ui
+    taredialog.ui \
+    selectport.ui

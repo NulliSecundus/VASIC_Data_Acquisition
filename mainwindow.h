@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "taredialog.h"
 #include "calibrationwindow.h"
+#include "selectport.h"
 
 #include <QApplication>
 #include <QWidget>
@@ -37,7 +38,7 @@ private:
     Ui::MainWindow *ui;
     taredialog *t;
     CalibrationWindow *calibrateWindow;
-    QScrollArea area;
+    SelectPort *portWindow;
 };
 
 #endif // MAINWINDOW_H
