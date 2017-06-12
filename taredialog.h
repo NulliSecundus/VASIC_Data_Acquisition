@@ -15,9 +15,14 @@ public:
     explicit taredialog(QWidget *parent = 0);
     ~taredialog();
 
+signals:
+    void tareClose();
+
 private slots:
 
     void on_tareExitButton_clicked();
+
+    void on_tareButton_clicked();
 
 private:
     Ui::taredialog *ui;

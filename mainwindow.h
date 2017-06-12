@@ -26,12 +26,15 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    QSerialPort *serial;
+
 private slots:
     void on_exitButton_clicked();
 
     void on_calibrateButton_clicked();
 
     void on_tareButton_clicked();
+    void onTareClose();
 
     void on_portSelectButton_clicked();
 
@@ -42,8 +45,8 @@ private:
     taredialog *t;
     CalibrationWindow *calibrateWindow;
     SettingsDialog *selectPort;
-    QSerialPort *serial;
     void closeSerialPort();
+    void writeData(const QByteArray &data);
 };
 
 #endif // MAINWINDOW_H

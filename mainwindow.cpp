@@ -31,8 +31,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     serial = new QSerialPort(this);
     selectPort = new SettingsDialog;
+    t = new taredialog();
+    calibrateWindow = new CalibrationWindow();
 
     connect(selectPort, SIGNAL(updatePort()), this, SLOT(openSerialPort()));
+    connect(t, &taredialog::tareClose, this, &MainWindow::onTareClose);
 }
 
 MainWindow::~MainWindow()
@@ -47,14 +50,24 @@ void MainWindow::on_exitButton_clicked()
 
 void MainWindow::on_calibrateButton_clicked()
 {
-    calibrateWindow = new CalibrationWindow();
-    calibrateWindow->show();
+    auto toWrite = "*P/";
+    if (serial->isWritable()) {
+        writeData(toWrite);
+        calibrateWindow->show();
+    } else {
+        QMessageBox::critical(this, tr("Error"), "Unable to connect to device");
+    }
 }
 
 void MainWindow::on_tareButton_clicked()
 {
-    t = new taredialog();
-    t->show();
+    auto toWrite = "*Z/";
+    if (serial->isWritable()) {
+        writeData(toWrite);
+        t->show();
+    } else {
+        QMessageBox::critical(this, tr("Error"), "Unable to connect to device");
+    }
 }
 
 void MainWindow::on_portSelectButton_clicked()
@@ -83,5 +96,20 @@ void MainWindow::closeSerialPort()
 {
     if (serial->isOpen()){
         serial->close();
+    }
+}
+
+void MainWindow::writeData(const QByteArray &data)
+{
+    serial->write(data);
+}
+
+void MainWindow::onTareClose()
+{
+    auto toWrite = "*Q/";
+    if (serial->isWritable()) {
+        writeData(toWrite);
+    } else {
+        QMessageBox::critical(this, tr("Error"), "Unable to connect to device");
     }
 }

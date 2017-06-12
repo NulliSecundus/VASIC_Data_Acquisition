@@ -16,5 +16,11 @@ taredialog::~taredialog()
 
 void taredialog::on_tareExitButton_clicked()
 {
+    emit tareClose();
     this -> close();
+}
+
+void taredialog::on_tareButton_clicked()
+{
+
 }
