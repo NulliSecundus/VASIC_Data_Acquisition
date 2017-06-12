@@ -32,6 +32,7 @@ private slots:
     void on_exitButton_clicked();
 
     void on_calibrateButton_clicked();
+    void onCalibrateClose();
 
     void on_tareButton_clicked();
     void onTareClose();
@@ -47,6 +48,7 @@ private:
     SettingsDialog *selectPort;
     void closeSerialPort();
     void writeData(const QByteArray &data);
+    void toWrite(const QByteArray &data);
 };
 
 #endif // MAINWINDOW_H

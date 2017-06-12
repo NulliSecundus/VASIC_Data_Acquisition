@@ -16,5 +16,8 @@ CalibrationWindow::~CalibrationWindow()
 
 void CalibrationWindow::on_calibrationExitButton_clicked()
 {
+    emit onCalibrationClose();
     this -> close();
 }
+
+

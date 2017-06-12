@@ -6,22 +6,25 @@
 #include <QDialog>
 
 namespace Ui {
-    class CalibrationWindow;
+class CalibrationWindow;
 }
 
 class CalibrationWindow : public QDialog
 {
     Q_OBJECT
 
-    public:
-        explicit CalibrationWindow(QWidget *parent = 0);
-        ~CalibrationWindow();
+public:
+    explicit CalibrationWindow(QWidget *parent = 0);
+    ~CalibrationWindow();
 
 private slots:
     void on_calibrationExitButton_clicked();
 
 private:
-        Ui::CalibrationWindow *ui;
+    Ui::CalibrationWindow *ui;
+
+signals:
+    void onCalibrationClose();
 };
 
 #endif // CALIBRATIONWINDOW_H
