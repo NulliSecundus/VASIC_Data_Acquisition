@@ -16,6 +16,8 @@ public:
     explicit SelectPort(QWidget *parent = 0);
     ~SelectPort();
 
+private slots:
+
 private:
     Ui::SelectPort *ui;
 };
