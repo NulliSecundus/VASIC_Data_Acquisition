@@ -12,17 +12,28 @@
 #include <QPushButton>
 #include <QtWidgets>
 
-QGroupBox *horizontalGroupBox;
-
 SelectPort::SelectPort(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SelectPort)
 {
     ui->setupUi(this);
     QVBoxLayout *mainLayout = new QVBoxLayout;
+    QHBoxLayout *topLayout = new QHBoxLayout;
+
+    //Set a title
     QLabel *titleLine = new QLabel;
-    titleLine->setText("Please select the comm port in use: ");
-    mainLayout->addWidget(titleLine);
+    titleLine->setText("Please select the ComPort in use");
+    titleLine->setMargin(1);
+    topLayout->addWidget(titleLine);
+
+    //create an exit button, link to slot
+    QPushButton *exitButton = new QPushButton;
+    exitButton->setText("Exit");
+    exitButton->setFixedWidth(75);
+    topLayout->addWidget(exitButton);
+    connect(exitButton, SIGNAL (clicked()), this, SLOT (onExitButtonClicked()));
+
+    mainLayout->addLayout(topLayout);
     mainLayout->setAlignment(titleLine, Qt::AlignTop);
 
     auto layout2 = new QVBoxLayout;
@@ -39,10 +50,17 @@ SelectPort::SelectPort(QWidget *parent) :
                 + QObject::tr("Busy: ") + (info.isBusy() ? QObject::tr("Yes") : QObject::tr("No")) + "\n";
 
         auto label = new QLabel(s);
-        QPushButton *button1 = new QPushButton("Select Port", this);
         auto layout = new QHBoxLayout;
+        const QString portName = info.portName();
+//        QSerialPort port = new QSerialPort(&info);
+
+        //Create selectPortButton, link to slot
+        QPushButton *selectPortButton = new QPushButton("Use " + portName, this);
+        selectPortButton->setFixedWidth(100);
+        connect(selectPortButton, SIGNAL (clicked()), this, SLOT (onSelectPortClicked()));
+
         layout->addWidget(label);
-        layout->addWidget(button1);
+        layout->addWidget(selectPortButton);
         layout2->addLayout(layout);
         layout2->setAlignment(layout, Qt::AlignTop);
     }
@@ -53,12 +71,20 @@ SelectPort::SelectPort(QWidget *parent) :
     mainLayout->setAlignment(workPage, Qt::AlignTop);
 
     setLayout(mainLayout);
-    setWindowTitle(tr("Basic Layouts"));
-
-    workPage->show();
+    setWindowTitle(tr("Select ComPort"));
 }
 
 SelectPort::~SelectPort()
 {
     delete ui;
+}
+
+void SelectPort::onExitButtonClicked()
+{
+    this->close();
+}
+
+void SelectPort::onSelectPortClicked()
+{
+    this->close();
 }

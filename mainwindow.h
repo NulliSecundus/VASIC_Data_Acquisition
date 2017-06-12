@@ -5,6 +5,7 @@
 #include "taredialog.h"
 #include "calibrationwindow.h"
 #include "selectport.h"
+#include "settingsdialog.h"
 
 #include <QApplication>
 #include <QWidget>
@@ -34,11 +35,15 @@ private slots:
 
     void on_portSelectButton_clicked();
 
+    void openSerialPort();
+
 private:
     Ui::MainWindow *ui;
     taredialog *t;
     CalibrationWindow *calibrateWindow;
-    SelectPort *portWindow;
+    SettingsDialog *selectPort;
+    QSerialPort *serial;
+    void closeSerialPort();
 };
 
 #endif // MAINWINDOW_H

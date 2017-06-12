@@ -29,14 +29,17 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     calibrationwindow.cpp \
     taredialog.cpp \
-    selectport.cpp
+    selectport.cpp \
+    settingsdialog.cpp
 
 HEADERS  += mainwindow.h \
     calibrationwindow.h \
     taredialog.h \
-    selectport.h
+    selectport.h \
+    settingsdialog.h
 
 FORMS    += mainwindow.ui \
     calibrationwindow.ui \
     taredialog.ui \
-    selectport.ui
+    selectport.ui \
+    settingsdialog.ui

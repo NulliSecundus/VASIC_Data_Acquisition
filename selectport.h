@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include <QListWidget>
+#include <QtSerialPort>
+#include <QSerialPortInfo>
 
 namespace Ui {
 class SelectPort;
@@ -17,6 +19,8 @@ public:
     ~SelectPort();
 
 private slots:
+    void onExitButtonClicked();
+    void onSelectPortClicked();
 
 private:
     Ui::SelectPort *ui;
