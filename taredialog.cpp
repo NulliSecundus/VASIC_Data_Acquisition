@@ -7,6 +7,9 @@ taredialog::taredialog(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowFlags(Qt::Window | Qt::MSWindowsFixedSizeDialogHint);
+
+    left = false;
+    right = false;
 }
 
 taredialog::~taredialog()
@@ -22,5 +25,29 @@ void taredialog::on_tareExitButton_clicked()
 
 void taredialog::on_tareButton_clicked()
 {
+    if(left){
+        emit leftTareClick();
+    }else if(right){
+        emit rightTareClick();
+    }else{
 
+    }
+}
+
+void taredialog::on_LeftLCButton_toggled(bool checked)
+{
+    if(checked){
+        left = true;
+    }else{
+        left = false;
+    }
+}
+
+void taredialog::on_RightLCButton_toggled(bool checked)
+{
+    if(checked){
+        right = true;
+    }else{
+        right = false;
+    }
 }

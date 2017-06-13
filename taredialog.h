@@ -17,6 +17,8 @@ public:
 
 signals:
     void tareClose();
+    void leftTareClick();
+    void rightTareClick();
 
 private slots:
 
@@ -24,8 +26,14 @@ private slots:
 
     void on_tareButton_clicked();
 
+    void on_LeftLCButton_toggled(bool checked);
+
+    void on_RightLCButton_toggled(bool checked);
+
 private:
     Ui::taredialog *ui;
+    bool left;
+    bool right;
 };
 
 #endif // TAREDIALOG_H

@@ -36,6 +36,8 @@ private slots:
 
     void on_tareButton_clicked();
     void onTareClose();
+    void onLeftTare();
+    void onRightTare();
 
     void on_portSelectButton_clicked();
 

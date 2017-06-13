@@ -21,3 +21,23 @@ void CalibrationWindow::on_calibrationExitButton_clicked()
 }
 
 
+
+void CalibrationWindow::on_calibrationStartButton_clicked()
+{
+
+}
+
+void CalibrationWindow::on_readEmptyWeightButton_clicked()
+{
+
+}
+
+void CalibrationWindow::on_readTestWeightButton_clicked()
+{
+
+}
+
+void CalibrationWindow::on_sendTestWeightButton_clicked()
+{
+
+}

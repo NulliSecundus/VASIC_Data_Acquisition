@@ -36,14 +36,14 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QRadioButton" name="radioButton">
+      <widget class="QRadioButton" name="LeftLCButton">
        <property name="text">
         <string>Left Loadcell</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="radioButton_2">
+      <widget class="QRadioButton" name="RightLCButton">
        <property name="text">
         <string>Right Loadcell</string>
        </property>

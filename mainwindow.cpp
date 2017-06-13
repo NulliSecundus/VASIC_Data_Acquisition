@@ -37,6 +37,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(selectPort, SIGNAL(updatePort()), this, SLOT(openSerialPort()));
     connect(t, &taredialog::tareClose, this, &MainWindow::onTareClose);
     connect(calibrateWindow, &CalibrationWindow::onCalibrationClose, this, &MainWindow::onCalibrateClose);
+    connect(t, &taredialog::leftTareClick, this, &MainWindow::onLeftTare);
+    connect(t, &taredialog::rightTareClick, this, &MainWindow::onRightTare);
 }
 
 MainWindow::~MainWindow()
@@ -51,7 +53,7 @@ void MainWindow::on_exitButton_clicked()
 
 void MainWindow::on_calibrateButton_clicked()
 {
-    auto toWrite = "*P/";
+    auto toWrite = "*P//";
     if (serial->isWritable()) {
         writeData(toWrite);
         calibrateWindow->show();
@@ -62,12 +64,12 @@ void MainWindow::on_calibrateButton_clicked()
 
 void MainWindow::onCalibrateClose()
 {
-    toWrite("*Q/");
+    toWrite("*Q//");
 }
 
 void MainWindow::on_tareButton_clicked()
 {
-    auto toWrite = "*Z/";
+    auto toWrite = "*Z//";
     if (serial->isWritable()) {
         writeData(toWrite);
         t->show();
@@ -78,7 +80,18 @@ void MainWindow::on_tareButton_clicked()
 
 void MainWindow::onTareClose()
 {
-    toWrite("*Q/");
+//    toWrite("*Q/");
+    writeData("*Q//");
+}
+
+void MainWindow::onLeftTare()
+{
+    writeData("*A//");
+}
+
+void MainWindow::onRightTare()
+{
+    writeData("*B//");
 }
 
 void MainWindow::on_portSelectButton_clicked()

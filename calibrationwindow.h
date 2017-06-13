@@ -20,6 +20,14 @@ public:
 private slots:
     void on_calibrationExitButton_clicked();
 
+    void on_calibrationStartButton_clicked();
+
+    void on_readEmptyWeightButton_clicked();
+
+    void on_readTestWeightButton_clicked();
+
+    void on_sendTestWeightButton_clicked();
+
 private:
     Ui::CalibrationWindow *ui;
 
