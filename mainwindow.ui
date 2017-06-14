@@ -108,7 +108,7 @@ QGroupBox::title {
      <property name="geometry">
       <rect>
        <x>60</x>
-       <y>280</y>
+       <y>300</y>
        <width>241</width>
        <height>111</height>
       </rect>
@@ -207,72 +207,6 @@ background: rgb(245, 245, 245);
          <string>Select Port</string>
         </property>
        </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="layoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>200</y>
-       <width>351</width>
-       <height>71</height>
-      </rect>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_13">
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QLabel" name="label_6">
-          <property name="text">
-           <string>Averaging Time</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="lineEdit_5">
-          <property name="styleSheet">
-           <string notr="true">QLineEdit { 
-background: rgb(245, 245, 245); 
-}</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="selectTimeButton">
-          <property name="text">
-           <string>Select Time</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <item>
-         <widget class="QLabel" name="label_7">
-          <property name="text">
-           <string>Saving to File</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="lineEdit_6">
-          <property name="styleSheet">
-           <string notr="true">QLineEdit { 
-background: rgb(245, 245, 245); 
-}</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="selectFileButton">
-          <property name="text">
-           <string>Select File</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
       </item>
      </layout>
     </widget>
@@ -406,6 +340,76 @@ background: rgb(245, 245, 245);
       </item>
      </layout>
     </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>210</y>
+       <width>291</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>Averaging Time</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="avgTimeWindow">
+        <property name="styleSheet">
+         <string notr="true">QLineEdit { 
+background: rgb(245, 245, 245); 
+}</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="selectTimeButton">
+        <property name="text">
+         <string>Select Time</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>250</y>
+       <width>291</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>Saving to File</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="fileNameWindow">
+        <property name="styleSheet">
+         <string notr="true">QLineEdit { 
+background: rgb(245, 245, 245); 
+}</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="selectFileButton">
+        <property name="text">
+         <string>Select File</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
     <zorder>layoutWidget</zorder>
     <zorder>layoutWidget</zorder>
     <zorder>layoutWidget</zorder>
@@ -414,6 +418,7 @@ background: rgb(245, 245, 245);
     <zorder>layoutWidget</zorder>
     <zorder>lineEdit_7</zorder>
     <zorder>label_13</zorder>
+    <zorder>label_6</zorder>
    </widget>
    <widget class="QGroupBox" name="groupBox_4">
     <property name="geometry">

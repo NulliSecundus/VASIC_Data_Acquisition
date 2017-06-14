@@ -29,17 +29,17 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     calibrationwindow.cpp \
     taredialog.cpp \
-    selectport.cpp \
-    settingsdialog.cpp
+    settingsdialog.cpp \
+    avgtimeselection.cpp
 
 HEADERS  += mainwindow.h \
     calibrationwindow.h \
     taredialog.h \
-    selectport.h \
-    settingsdialog.h
+    settingsdialog.h \
+    avgtimeselection.h
 
 FORMS    += mainwindow.ui \
     calibrationwindow.ui \
     taredialog.ui \
-    selectport.ui \
-    settingsdialog.ui
+    settingsdialog.ui \
+    avgtimeselection.ui

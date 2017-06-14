@@ -2,8 +2,8 @@
 #include "ui_mainwindow.h"
 #include "calibrationwindow.h"
 #include "taredialog.h"
-#include "selectport.h"
 #include "settingsdialog.h"
+#include "avgtimeselection.h"
 
 #include <QApplication>
 #include <QWidget>
@@ -31,11 +31,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->usingPortDisp->setReadOnly(true);
     ui->timeLineEdit->setReadOnly(true);
     ui->dateLineEdit->setReadOnly(true);
+    ui->avgTimeWindow->setReadOnly(true);
+    ui->fileNameWindow->setReadOnly(true);
 
     serial = new QSerialPort(this);
     selectPort = new SettingsDialog;
     t = new taredialog();
     calibrateWindow = new CalibrationWindow();
+    timeSelect = new AvgTimeSelection();
 
     time = QDateTime::currentDateTime();
     font = ui->timeLineEdit->font();
@@ -55,6 +58,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(calibrateWindow, &CalibrationWindow::emptyWeightRead, this, &MainWindow::onCalibrationEmpty);
     connect(calibrateWindow, &CalibrationWindow::testWeightRead, this, &MainWindow::onCalibrationTestWeight);
     connect(calibrateWindow, &CalibrationWindow::testWeightSent, this, &MainWindow::onCalibrationComplete);
+
+    connect(timeSelect, &AvgTimeSelection::avgTimeSelected, this, &MainWindow::onAvgTimeSelected);
+    connect(timeSelect, &AvgTimeSelection::avgTimeClose, this, &MainWindow::onAvgTimeClose);
 }
 
 MainWindow::~MainWindow()
@@ -187,5 +193,23 @@ void MainWindow::on_updateTime_clicked()
 
 void MainWindow::on_selectTimeButton_clicked()
 {
+    auto toWrite = "*T//";
+    if (serial->isWritable()) {
+        writeData(toWrite);
+        timeSelect->show();
+    } else {
+        QMessageBox::critical(this, tr("Error"), "Unable to connect to device");
+    }
+}
 
+void MainWindow::onAvgTimeSelected(int time, QString text)
+{
+    QString s = "*G" + QString::number(time) + "//";
+    ui->avgTimeWindow->setText(text);
+    writeData(s.toLocal8Bit());
+}
+
+void MainWindow::onAvgTimeClose()
+{
+    writeData("*X//");
 }

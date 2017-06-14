@@ -4,8 +4,8 @@
 #include <QMainWindow>
 #include "taredialog.h"
 #include "calibrationwindow.h"
-#include "selectport.h"
 #include "settingsdialog.h"
+#include "avgtimeselection.h"
 
 #include <QApplication>
 #include <QWidget>
@@ -50,6 +50,10 @@ private slots:
 
     void on_updateTime_clicked();
 
+    void on_selectTimeButton_clicked();
+    void onAvgTimeSelected(int time, QString text);
+    void onAvgTimeClose();
+
 private:
     Ui::MainWindow *ui;
     taredialog *t;
@@ -57,6 +61,7 @@ private:
     SettingsDialog *selectPort;
     QDateTime time;
     QFont font;
+    AvgTimeSelection *timeSelect;
     void closeSerialPort();
     void writeData(const QByteArray &data);
     void toWrite(const QByteArray &data);
