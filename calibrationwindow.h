@@ -28,11 +28,19 @@ private slots:
 
     void on_sendTestWeightButton_clicked();
 
+    void on_LeftLCButton_toggled(bool checked);
+
+    void on_RightLCButton_toggled(bool checked);
+
 private:
     Ui::CalibrationWindow *ui;
+    bool left;
+    bool right;
+    bool startCalibration;
 
 signals:
     void onCalibrationClose();
+    void calibrationStart(bool left);
 };
 
 #endif // CALIBRATIONWINDOW_H

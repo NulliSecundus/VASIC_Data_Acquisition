@@ -33,6 +33,7 @@ private slots:
 
     void on_calibrateButton_clicked();
     void onCalibrateClose();
+    void onCalibrationStart(bool left);
 
     void on_tareButton_clicked();
     void onTareClose();

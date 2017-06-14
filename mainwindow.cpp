@@ -36,9 +36,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(selectPort, SIGNAL(updatePort()), this, SLOT(openSerialPort()));
     connect(t, &taredialog::tareClose, this, &MainWindow::onTareClose);
-    connect(calibrateWindow, &CalibrationWindow::onCalibrationClose, this, &MainWindow::onCalibrateClose);
     connect(t, &taredialog::leftTareClick, this, &MainWindow::onLeftTare);
     connect(t, &taredialog::rightTareClick, this, &MainWindow::onRightTare);
+
+    connect(calibrateWindow, &CalibrationWindow::onCalibrationClose, this, &MainWindow::onCalibrateClose);
+    connect(calibrateWindow, &CalibrationWindow::calibrationStart, this, &MainWindow::onCalibrationStart);
 }
 
 MainWindow::~MainWindow()
@@ -62,6 +64,15 @@ void MainWindow::on_calibrateButton_clicked()
     }
 }
 
+void MainWindow::onCalibrationStart(bool left)
+{
+    if(left){
+        writeData("*A//");
+    }else{
+        writeData("*B//");
+    }
+}
+
 void MainWindow::onCalibrateClose()
 {
     toWrite("*Q//");
@@ -80,7 +91,7 @@ void MainWindow::on_tareButton_clicked()
 
 void MainWindow::onTareClose()
 {
-//    toWrite("*Q/");
+    //    toWrite("*Q/");
     writeData("*Q//");
 }
 
