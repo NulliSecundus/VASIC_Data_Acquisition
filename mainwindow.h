@@ -13,6 +13,7 @@
 #include <QLabel>
 #include <QScrollArea>
 #include <QtSerialPort/QSerialPortInfo>
+#include <QDateTime>
 
 namespace Ui {
 class MainWindow;
@@ -34,6 +35,9 @@ private slots:
     void on_calibrateButton_clicked();
     void onCalibrateClose();
     void onCalibrationStart(bool left);
+    void onCalibrationEmpty();
+    void onCalibrationTestWeight();
+    void onCalibrationComplete();
 
     void on_tareButton_clicked();
     void onTareClose();
@@ -44,11 +48,15 @@ private slots:
 
     void openSerialPort();
 
+    void on_updateTime_clicked();
+
 private:
     Ui::MainWindow *ui;
     taredialog *t;
     CalibrationWindow *calibrateWindow;
     SettingsDialog *selectPort;
+    QDateTime time;
+    QFont font;
     void closeSerialPort();
     void writeData(const QByteArray &data);
     void toWrite(const QByteArray &data);

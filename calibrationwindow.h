@@ -16,6 +16,7 @@ class CalibrationWindow : public QDialog
 public:
     explicit CalibrationWindow(QWidget *parent = 0);
     ~CalibrationWindow();
+    QString testWeightValue;
 
 private slots:
     void on_calibrationExitButton_clicked();
@@ -32,6 +33,8 @@ private slots:
 
     void on_RightLCButton_toggled(bool checked);
 
+    void on_testWeightValue_textEdited(const QString &arg1);
+
 private:
     Ui::CalibrationWindow *ui;
     bool left;
@@ -41,6 +44,9 @@ private:
 signals:
     void onCalibrationClose();
     void calibrationStart(bool left);
+    void emptyWeightRead();
+    void testWeightRead();
+    void testWeightSent();
 };
 
 #endif // CALIBRATIONWINDOW_H

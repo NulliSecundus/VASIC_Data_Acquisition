@@ -13,6 +13,7 @@
 #include <QtSerialPort>
 #include <QSerialPortInfo>
 #include <QMessageBox>
+#include <QDateTime>
 
 QT_USE_NAMESPACE
 
@@ -28,11 +29,21 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->controllerStatus->setAlignment(Qt::AlignCenter);
     ui->usingPortDisp->setAlignment(Qt::AlignCenter);
     ui->usingPortDisp->setReadOnly(true);
+    ui->timeLineEdit->setReadOnly(true);
+    ui->dateLineEdit->setReadOnly(true);
 
     serial = new QSerialPort(this);
     selectPort = new SettingsDialog;
     t = new taredialog();
     calibrateWindow = new CalibrationWindow();
+
+    time = QDateTime::currentDateTime();
+    font = ui->timeLineEdit->font();
+    font.setPointSize(10);
+    ui->timeLineEdit->setFont(font);
+    ui->timeLineEdit->setText(time.time().toString());
+    ui->dateLineEdit->setFont(font);
+    ui->dateLineEdit->setText(time.date().toString("MM-dd-yyyy"));
 
     connect(selectPort, SIGNAL(updatePort()), this, SLOT(openSerialPort()));
     connect(t, &taredialog::tareClose, this, &MainWindow::onTareClose);
@@ -41,6 +52,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(calibrateWindow, &CalibrationWindow::onCalibrationClose, this, &MainWindow::onCalibrateClose);
     connect(calibrateWindow, &CalibrationWindow::calibrationStart, this, &MainWindow::onCalibrationStart);
+    connect(calibrateWindow, &CalibrationWindow::emptyWeightRead, this, &MainWindow::onCalibrationEmpty);
+    connect(calibrateWindow, &CalibrationWindow::testWeightRead, this, &MainWindow::onCalibrationTestWeight);
+    connect(calibrateWindow, &CalibrationWindow::testWeightSent, this, &MainWindow::onCalibrationComplete);
 }
 
 MainWindow::~MainWindow()
@@ -71,6 +85,22 @@ void MainWindow::onCalibrationStart(bool left)
     }else{
         writeData("*B//");
     }
+}
+
+void MainWindow::onCalibrationEmpty()
+{
+    writeData("*C//");
+}
+
+void MainWindow::onCalibrationTestWeight()
+{
+    writeData("*D//");
+}
+
+void MainWindow::onCalibrationComplete()
+{
+    QString toWrite = "*S" + calibrateWindow->testWeightValue + "//";
+    writeData(toWrite.toLocal8Bit());
 }
 
 void MainWindow::onCalibrateClose()
@@ -146,4 +176,16 @@ void MainWindow::toWrite(const QByteArray &data)
     } else {
         QMessageBox::critical(this, tr("Error"), "Unable to connect to device");
     }
+}
+
+void MainWindow::on_updateTime_clicked()
+{
+    time = QDateTime::currentDateTime();
+    ui->timeLineEdit->setText(time.time().toString());
+    ui->dateLineEdit->setText(time.date().toString("MM-dd-yyyy"));
+}
+
+void MainWindow::on_selectTimeButton_clicked()
+{
+
 }
