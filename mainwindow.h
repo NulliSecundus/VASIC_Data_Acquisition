@@ -54,6 +54,12 @@ private slots:
     void onAvgTimeSelected(int time, QString text);
     void onAvgTimeClose();
 
+    void readData();
+
+    void on_sessionStartButton_clicked();
+
+    void on_sessionStopButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     taredialog *t;
@@ -62,9 +68,14 @@ private:
     QDateTime time;
     QFont font;
     AvgTimeSelection *timeSelect;
+    QByteArray data;
+    qint64 bytesRead;
+    qint64 bytesToRead;
+    QString mode;
     void closeSerialPort();
     void writeData(const QByteArray &data);
     void toWrite(const QByteArray &data);
+    void processData(QString data, QString mode);
 };
 
 #endif // MAINWINDOW_H

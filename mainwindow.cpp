@@ -33,12 +33,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->dateLineEdit->setReadOnly(true);
     ui->avgTimeWindow->setReadOnly(true);
     ui->fileNameWindow->setReadOnly(true);
+    ui->messageDisp->setReadOnly(true);
 
     serial = new QSerialPort(this);
     selectPort = new SettingsDialog;
     t = new taredialog();
     calibrateWindow = new CalibrationWindow();
     timeSelect = new AvgTimeSelection();
+    bytesToRead = 8;
+    mode = "main";
 
     time = QDateTime::currentDateTime();
     font = ui->timeLineEdit->font();
@@ -61,6 +64,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(timeSelect, &AvgTimeSelection::avgTimeSelected, this, &MainWindow::onAvgTimeSelected);
     connect(timeSelect, &AvgTimeSelection::avgTimeClose, this, &MainWindow::onAvgTimeClose);
+
+    connect(serial, &QSerialPort::readyRead, this, &MainWindow::readData);
 }
 
 MainWindow::~MainWindow()
@@ -71,6 +76,34 @@ MainWindow::~MainWindow()
 void MainWindow::on_exitButton_clicked()
 {
     QCoreApplication::quit();
+}
+
+void MainWindow::readData()
+{
+    //    bytesRead = serial->read(data, bytesToRead);
+    data = serial->readAll();
+    QString s = data;
+    char data1 = data.at(0);
+    s = data1;
+    if(s.compare("t") == 0){
+        mode = "timeMode";
+    }else if(s.compare("z") == 0){
+        mode = "tareMode";
+    }else if(s.compare("p") == 0){
+        mode = "calibrationMode";
+    }else if(s.compare("m") == 0){
+        mode = "collectionMode";
+    }
+    ui->messageDisp->setText(data);
+    processData(s, mode);
+}
+
+void MainWindow::processData(QString data, QString mode){
+    if(mode.compare("timeMode") == 0){
+        if(data.compare("g") == 0){
+            QMessageBox::information(timeSelect, "Success", "Time Mode Set");
+        }
+    }
 }
 
 void MainWindow::on_calibrateButton_clicked()
@@ -112,6 +145,8 @@ void MainWindow::onCalibrationComplete()
 void MainWindow::onCalibrateClose()
 {
     toWrite("*Q//");
+    mode = "main";
+    ui->messageDisp->setText(mode);
 }
 
 void MainWindow::on_tareButton_clicked()
@@ -129,6 +164,8 @@ void MainWindow::onTareClose()
 {
     //    toWrite("*Q/");
     writeData("*Q//");
+    mode = "main";
+    ui->messageDisp->setText(mode);
 }
 
 void MainWindow::onLeftTare()
@@ -212,4 +249,16 @@ void MainWindow::onAvgTimeSelected(int time, QString text)
 void MainWindow::onAvgTimeClose()
 {
     writeData("*X//");
+    mode = "main";
+    ui->messageDisp->setText(mode);
+}
+
+void MainWindow::on_sessionStartButton_clicked()
+{
+    writeData("*M//");
+}
+
+void MainWindow::on_sessionStopButton_clicked()
+{
+    writeData("*K//");
 }

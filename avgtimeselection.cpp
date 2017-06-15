@@ -1,5 +1,6 @@
 #include "avgtimeselection.h"
 #include "ui_avgtimeselection.h"
+#include <QMessageBox>
 
 AvgTimeSelection::AvgTimeSelection(QWidget *parent) :
     QDialog(parent),
