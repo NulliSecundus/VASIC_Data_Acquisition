@@ -68,14 +68,17 @@ private:
     QDateTime time;
     QFont font;
     AvgTimeSelection *timeSelect;
-    QByteArray data;
+    QByteArray procData;
+    QByteArray procLeft;
+    QByteArray procRight;
     qint64 bytesRead;
     qint64 bytesToRead;
     QString mode;
+    QList<QByteArray> splitProc;
     void closeSerialPort();
     void writeData(const QByteArray &data);
     void toWrite(const QByteArray &data);
-    void processData(QString data, QString mode);
+    void processData(QByteArray data, QString mode);
 };
 
 #endif // MAINWINDOW_H

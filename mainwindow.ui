@@ -574,7 +574,7 @@ background: rgb(245, 245, 245);
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_10"/>
+         <widget class="QLineEdit" name="field4Meas"/>
         </item>
        </layout>
       </item>
@@ -591,7 +591,7 @@ background: rgb(245, 245, 245);
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_12"/>
+         <widget class="QLineEdit" name="field5Meas"/>
         </item>
        </layout>
       </item>
@@ -620,7 +620,7 @@ background: rgb(245, 245, 245);
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_9"/>
+         <widget class="QLineEdit" name="field4Line"/>
         </item>
        </layout>
       </item>
@@ -637,7 +637,7 @@ background: rgb(245, 245, 245);
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_11"/>
+         <widget class="QLineEdit" name="field5Line"/>
         </item>
        </layout>
       </item>

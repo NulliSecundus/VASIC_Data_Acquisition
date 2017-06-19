@@ -15,6 +15,8 @@
 #include <QMessageBox>
 #include <QDateTime>
 
+#include <QDebug>
+
 QT_USE_NAMESPACE
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -40,7 +42,7 @@ MainWindow::MainWindow(QWidget *parent) :
     t = new taredialog();
     calibrateWindow = new CalibrationWindow();
     timeSelect = new AvgTimeSelection();
-    bytesToRead = 8;
+    bytesToRead = 512;
     mode = "main";
 
     time = QDateTime::currentDateTime();
@@ -81,10 +83,11 @@ void MainWindow::on_exitButton_clicked()
 void MainWindow::readData()
 {
     //    bytesRead = serial->read(data, bytesToRead);
-    data = serial->readAll();
+    QByteArray data = serial->readAll();
+    //    qDebug() << data;
     QString s = data;
-    char data1 = data.at(0);
-    s = data1;
+    //    char data1 = data.at(0);
+    //    s = data1;
     if(s.compare("t") == 0){
         mode = "timeMode";
     }else if(s.compare("z") == 0){
@@ -94,14 +97,32 @@ void MainWindow::readData()
     }else if(s.compare("m") == 0){
         mode = "collectionMode";
     }
-    ui->messageDisp->setText(data);
-    processData(s, mode);
+    processData(data, mode);
 }
 
-void MainWindow::processData(QString data, QString mode){
+void MainWindow::processData(QByteArray data, QString mode){
     if(mode.compare("timeMode") == 0){
-        if(data.compare("g") == 0){
+        if(QString(data).compare("g") == 0){
             QMessageBox::information(timeSelect, "Success", "Time Mode Set");
+        }
+    }
+    if(mode.compare("collectionMode") == 0){
+//        qDebug() << data;
+        if(data[0] == 'L'){
+            procData = data;
+        }else if(data[data.length()-1] == 'E'){
+            procData.append(data);
+//            qDebug() << procData;
+            splitProc = procData.split('\r');
+//            qDebug() << splitProc.length();
+            if(splitProc.length() == 3){
+                ui->field4Meas->setText(splitProc.at(0));
+                ui->field5Meas->setText(splitProc.at(1));
+            }
+            qDebug() << splitProc;
+        }
+        else{
+            procData.append(data);
         }
     }
 }
