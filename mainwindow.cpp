@@ -14,6 +14,9 @@
 #include <QSerialPortInfo>
 #include <QMessageBox>
 #include <QDateTime>
+#include <QFileDialog>
+#include <QFile>
+#include <QTextStream>
 
 #include <QDebug>
 
@@ -35,7 +38,28 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->dateLineEdit->setReadOnly(true);
     ui->avgTimeWindow->setReadOnly(true);
     ui->fileNameWindow->setReadOnly(true);
-    ui->messageDisp->setReadOnly(true);
+    ui->field4Meas->setReadOnly(true);
+    ui->field5Meas->setReadOnly(true);
+
+    //setup for sensorOnBox checkbox
+    ui->sensorOnBox->setChecked(false);
+    ui->sensorOnBox->setAttribute(Qt::WA_TransparentForMouseEvents);
+    ui->sensorOnBox->setFocusPolicy(Qt::NoFocus);
+
+    //setup for dataSavingBox checkbox
+    ui->dataSavingBox->setChecked(false);
+    ui->dataSavingBox->setAttribute(Qt::WA_TransparentForMouseEvents);
+    ui->dataSavingBox->setFocusPolicy(Qt::NoFocus);
+
+    //setup for leftReceivingBox checkbox
+    ui->leftReceivingBox->setChecked(false);
+    ui->leftReceivingBox->setAttribute(Qt::WA_TransparentForMouseEvents);
+    ui->leftReceivingBox->setFocusPolicy(Qt::NoFocus);
+
+    //setup for rightReceivingBox checkbox
+    ui->rightReceivingBox->setChecked(false);
+    ui->rightReceivingBox->setAttribute(Qt::WA_TransparentForMouseEvents);
+    ui->rightReceivingBox->setFocusPolicy(Qt::NoFocus);
 
     serial = new QSerialPort(this);
     selectPort = new SettingsDialog;
@@ -44,14 +68,20 @@ MainWindow::MainWindow(QWidget *parent) :
     timeSelect = new AvgTimeSelection();
     bytesToRead = 512;
     mode = "main";
+    fileExtension = ".csv";
 
     time = QDateTime::currentDateTime();
     font = ui->timeLineEdit->font();
     font.setPointSize(10);
     ui->timeLineEdit->setFont(font);
-    ui->timeLineEdit->setText(time.time().toString());
+    curTime = time.time().toString();
+    ui->timeLineEdit->setText(curTime);
     ui->dateLineEdit->setFont(font);
-    ui->dateLineEdit->setText(time.date().toString("MM-dd-yyyy"));
+    curDate = time.date().toString("MM-dd-yyyy");
+    ui->dateLineEdit->setText(curDate);
+    ui->lineEdit_3->setPlaceholderText("Name");
+    ui->option1Line->setPlaceholderText("label 1");
+    ui->option2Line->setPlaceholderText("label 2");
 
     connect(selectPort, SIGNAL(updatePort()), this, SLOT(openSerialPort()));
     connect(t, &taredialog::tareClose, this, &MainWindow::onTareClose);
@@ -82,12 +112,8 @@ void MainWindow::on_exitButton_clicked()
 
 void MainWindow::readData()
 {
-    //    bytesRead = serial->read(data, bytesToRead);
     QByteArray data = serial->readAll();
-    //    qDebug() << data;
     QString s = data;
-    //    char data1 = data.at(0);
-    //    s = data1;
     if(s.compare("t") == 0){
         mode = "timeMode";
     }else if(s.compare("z") == 0){
@@ -96,6 +122,11 @@ void MainWindow::readData()
         mode = "calibrationMode";
     }else if(s.compare("m") == 0){
         mode = "collectionMode";
+        QMessageBox::information(this, "Success", "Controller responded OK");
+        writeStartSession();
+    }else if(s.compare("k") == 0){
+        mode = "main";
+        QMessageBox::information(this, "Success", "Controller responded OK");
     }
     processData(data, mode);
 }
@@ -107,19 +138,26 @@ void MainWindow::processData(QByteArray data, QString mode){
         }
     }
     if(mode.compare("collectionMode") == 0){
-//        qDebug() << data;
         if(data[0] == 'L'){
             procData = data;
-        }else if(data[data.length()-1] == 'E'){
+        }else if(data[0] == 'V'){
+            writeSensorBroken();
+        }else if(data[0] == 'W'){
+            writeSensorMade();
+        }else if(data[data.length()-1] == '\r'){
             procData.append(data);
-//            qDebug() << procData;
-            splitProc = procData.split('\r');
-//            qDebug() << splitProc.length();
-            if(splitProc.length() == 3){
-                ui->field4Meas->setText(splitProc.at(0));
-                ui->field5Meas->setText(splitProc.at(1));
+            //            qDebug() << procData;
+            if(procData.contains('L') && procData.contains('R')){
+                splitProc = procData.split('\r');
+                if(splitProc.length() >= 2){
+                    QByteArray leftData = splitProc.at(0);
+                    QByteArray rightData = splitProc.at(1);
+                    ui->field4Meas->setText(leftData.remove(0, 1));
+                    ui->field5Meas->setText(rightData.remove(0,1));
+                    writeDataToFile(leftData, rightData);
+                }
+                //                qDebug() << splitProc;
             }
-            qDebug() << splitProc;
         }
         else{
             procData.append(data);
@@ -167,7 +205,6 @@ void MainWindow::onCalibrateClose()
 {
     toWrite("*Q//");
     mode = "main";
-    ui->messageDisp->setText(mode);
 }
 
 void MainWindow::on_tareButton_clicked()
@@ -186,7 +223,6 @@ void MainWindow::onTareClose()
     //    toWrite("*Q/");
     writeData("*Q//");
     mode = "main";
-    ui->messageDisp->setText(mode);
 }
 
 void MainWindow::onLeftTare()
@@ -271,7 +307,6 @@ void MainWindow::onAvgTimeClose()
 {
     writeData("*X//");
     mode = "main";
-    ui->messageDisp->setText(mode);
 }
 
 void MainWindow::on_sessionStartButton_clicked()
@@ -282,4 +317,128 @@ void MainWindow::on_sessionStartButton_clicked()
 void MainWindow::on_sessionStopButton_clicked()
 {
     writeData("*K//");
+    writeStopSession();
+}
+
+void MainWindow::on_selectFileButton_clicked()
+{
+    if(ui->radioButton_3->isChecked()){
+        filename = QFileDialog::getSaveFileName(this, tr("Save File"), QString(), tr("Text Files (*.txt)"));
+        ui->fileNameWindow->setText(filename);
+    }else{
+        filename = QFileDialog::getSaveFileName(this, tr("Save File"), QString(), tr("CSV Files (*.csv)"));
+        ui->fileNameWindow->setText(filename);
+    }
+}
+
+void MainWindow::on_defaultFilename_clicked()
+{
+    directory = "/";
+    autoFileName();
+    ui->fileNameWindow->setText(directory + filename);
+}
+
+void MainWindow::autoFileName()
+{
+    if(nameField.length()<1){
+        nameField = "Name";
+    }
+    if(option1.length()>0 && option2.length()>0){
+        filename = curDate + "_" + nameField + "_" + option1 + "_" + option2 + fileExtension;
+    }else if(option1.length()>0){
+        filename = curDate + "_" + nameField + "_" + option1 + fileExtension;
+    }else if(option2.length()>0){
+        filename = curDate + "_" + nameField + "_" + option2 + fileExtension;
+    }else{
+        filename = curDate + "_" + nameField + fileExtension;
+    }
+}
+
+void MainWindow::on_lineEdit_3_textChanged(const QString &arg1)
+{
+    nameField = arg1;
+}
+
+void MainWindow::on_option1Line_textChanged(const QString &arg1)
+{
+    option1 = arg1;
+}
+
+void MainWindow::on_option2Line_textChanged(const QString &arg1)
+{
+    option2 = arg1;
+}
+
+void MainWindow::on_clearButton_clicked()
+{
+    ui->lineEdit_3->clear();
+    ui->option1Line->clear();
+    ui->option2Line->clear();
+}
+
+void MainWindow::on_radioButton_3_toggled(bool checked)
+{
+    if(checked){
+        fileExtension = ".txt";
+    }
+}
+
+void MainWindow::on_radioButton_4_toggled(bool checked)
+{
+    if(checked){
+        fileExtension = ".csv";
+    }
+}
+
+void MainWindow::on_selectFolderButton_clicked()
+{
+    directory = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "/home", QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+    autoFileName();
+    ui->fileNameWindow->setText(directory + "/" + filename);
+}
+
+void MainWindow::writeStartSession()
+{
+    QFile data(filename);
+    if (data.open(QIODevice::WriteOnly| QIODevice::Truncate)) {
+        QTextStream out(&data);
+        out << time.currentDateTime().time().toString() << "," << "*****" <<  "," << "Started Session" << "," << "*****" << "\n";
+    }
+}
+
+void MainWindow::writeSensorBroken()
+{
+    QFile data(filename);
+    if (data.open(QIODevice::ReadWrite| QIODevice::Append)) {
+        QTextStream out(&data);
+        out << time.currentDateTime().time().toString() << "," << "*****" <<  "," << "Sensor Broken" << "," << "*****" << "\n";
+    }
+}
+
+void MainWindow::writeSensorMade()
+{
+    QFile data(filename);
+    if (data.open(QIODevice::ReadWrite| QIODevice::Append)) {
+        QTextStream out(&data);
+        out << time.currentDateTime().time().toString() << "," << "*****" <<  "," << "Sensor Made" << "," << "*****" << "\n";
+    }
+}
+
+void MainWindow::writeStopSession()
+{
+    QFile data(filename);
+    if (data.open(QIODevice::ReadWrite| QIODevice::Append)) {
+        QTextStream out(&data);
+        out << time.currentDateTime().time().toString() << "," << "*****" <<  "," << "Stopped Session" << "," << "*****" << "\n";
+    }
+}
+
+void MainWindow::writeDataToFile(QByteArray left, QByteArray right)
+{
+    QFile data(filename);
+    if (data.open(QIODevice::ReadWrite| QIODevice::Append)) {
+        QTextStream out(&data);
+        //TODO: add in ref time
+        out << "," << "," << "," << time.currentDateTime().time().toString() << "," << "," << left << "," << "," << right << "\n";
+    }
 }

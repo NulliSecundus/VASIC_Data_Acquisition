@@ -60,6 +60,24 @@ private slots:
 
     void on_sessionStopButton_clicked();
 
+    void on_selectFileButton_clicked();
+
+    void on_defaultFilename_clicked();
+
+    void on_lineEdit_3_textChanged(const QString &arg1);
+
+    void on_option1Line_textChanged(const QString &arg1);
+
+    void on_option2Line_textChanged(const QString &arg1);
+
+    void on_clearButton_clicked();
+
+    void on_radioButton_3_toggled(bool checked);
+
+    void on_radioButton_4_toggled(bool checked);
+
+    void on_selectFolderButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     taredialog *t;
@@ -75,10 +93,24 @@ private:
     qint64 bytesToRead;
     QString mode;
     QList<QByteArray> splitProc;
+    QString filename;
+    QString curDate;
+    QString curTime;
+    QString nameField;
+    QString option1;
+    QString option2;
+    QString fileExtension;
+    QString directory;
     void closeSerialPort();
     void writeData(const QByteArray &data);
     void toWrite(const QByteArray &data);
     void processData(QByteArray data, QString mode);
+    void autoFileName();
+    void writeStartSession();
+    void writeSensorBroken();
+    void writeSensorMade();
+    void writeStopSession();
+    void writeDataToFile(QByteArray left, QByteArray right);
 };
 
 #endif // MAINWINDOW_H
