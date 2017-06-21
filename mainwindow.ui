@@ -13,13 +13,17 @@
   <property name="windowTitle">
    <string>Load Cell Measurement</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/qresource/icon_200x200.png</normaloff>:/qresource/icon_200x200.png</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>410</x>
+      <x>420</x>
       <y>60</y>
-      <width>281</width>
+      <width>271</width>
       <height>81</height>
      </rect>
     </property>
@@ -39,18 +43,18 @@ QGroupBox::title {
     <property name="title">
      <string>Session Controls</string>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>20</x>
        <y>30</y>
-       <width>241</width>
+       <width>231</width>
        <height>25</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
-       <widget class="QPushButton" name="pushButton_5">
+       <widget class="QPushButton" name="sessionStartButton">
         <property name="text">
          <string>Start</string>
         </property>
@@ -70,7 +74,7 @@ QGroupBox::title {
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_6">
+       <widget class="QPushButton" name="sessionStopButton">
         <property name="text">
          <string>Stop</string>
         </property>
@@ -82,10 +86,10 @@ QGroupBox::title {
    <widget class="QGroupBox" name="groupBox_3">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>10</y>
-      <width>371</width>
-      <height>471</height>
+      <width>391</width>
+      <height>481</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -104,128 +108,23 @@ QGroupBox::title {
     <property name="title">
      <string>Session Indentification and Setup Information</string>
     </property>
-    <widget class="QWidget" name="">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>20</y>
-       <width>77</width>
-       <height>91</height>
-      </rect>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_4">
-      <item>
-       <widget class="QPushButton" name="pushButton">
-        <property name="text">
-         <string>Clear</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="text">
-         <string>Save</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>55</width>
-       <height>131</height>
-      </rect>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Time/Data:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Field 1:</string>
-        </property>
-        <property name="textFormat">
-         <enum>Qt::PlainText</enum>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Field 2:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>Field 3:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="">
-     <property name="geometry">
-      <rect>
-       <x>71</x>
-       <y>21</y>
-       <width>201</width>
-       <height>131</height>
-      </rect>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="QLineEdit" name="lineEdit"/>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="lineEdit_2"/>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="lineEdit_3"/>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="lineEdit_4"/>
-      </item>
-     </layout>
-    </widget>
     <widget class="QGroupBox" name="groupBox_2">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>270</y>
+       <x>70</x>
+       <y>310</y>
        <width>241</width>
-       <height>111</height>
+       <height>91</height>
       </rect>
      </property>
      <property name="title">
       <string>When Saving Data</string>
      </property>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>30</y>
+        <y>20</y>
         <width>184</width>
         <height>42</height>
        </rect>
@@ -247,13 +146,13 @@ QGroupBox::title {
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>80</y>
+        <x>40</x>
+        <y>60</y>
         <width>191</width>
-        <height>19</height>
+        <height>31</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -267,23 +166,19 @@ QGroupBox::title {
        <item>
         <widget class="QRadioButton" name="radioButton_4">
          <property name="text">
-          <string>CVS (Excel) File</string>
+          <string>CSV (Excel) File</string>
          </property>
         </widget>
        </item>
       </layout>
      </widget>
-     <zorder></zorder>
-     <zorder></zorder>
-     <zorder>radioButton_3</zorder>
-     <zorder>radioButton_3</zorder>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>410</y>
-       <width>241</width>
+       <x>90</x>
+       <y>430</y>
+       <width>201</width>
        <height>25</height>
       </rect>
      </property>
@@ -302,7 +197,13 @@ QGroupBox::title {
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit_7"/>
+       <widget class="QLineEdit" name="usingPortDisp">
+        <property name="styleSheet">
+         <string notr="true">QLineEdit { 
+background: rgb(245, 245, 245); 
+}</string>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QPushButton" name="portSelectButton">
@@ -313,75 +214,255 @@ QGroupBox::title {
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>180</y>
-       <width>321</width>
-       <height>71</height>
+       <x>100</x>
+       <y>20</y>
+       <width>161</width>
+       <height>171</height>
       </rect>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_13">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QLabel" name="label_6">
-          <property name="text">
-           <string>Averaging Time</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="lineEdit_5"/>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_3">
-          <property name="text">
-           <string>Select Time</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QLineEdit" name="timeLineEdit">
+        <property name="styleSheet">
+         <string notr="true">QLineEdit { 
+background: rgb(245, 245, 245); 
+}</string>
+        </property>
+       </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <item>
-         <widget class="QLabel" name="label_7">
-          <property name="text">
-           <string>Saving to File</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="lineEdit_6"/>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_4">
-          <property name="text">
-           <string>Select File</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QLineEdit" name="dateLineEdit">
+        <property name="styleSheet">
+         <string notr="true">QLineEdit { 
+background: rgb(245, 245, 245); 
+}</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEdit_3"/>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="option1Line"/>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="option2Line"/>
       </item>
      </layout>
     </widget>
-    <zorder></zorder>
-    <zorder></zorder>
-    <zorder></zorder>
-    <zorder></zorder>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>36</x>
+       <y>20</y>
+       <width>51</width>
+       <height>171</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Time:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Date:</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::PlainText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Name:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Option 1:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_13">
+        <property name="text">
+         <string>Option 2:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>20</y>
+       <width>77</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <widget class="QPushButton" name="updateTime">
+        <property name="text">
+         <string>Update Time</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="clearButton">
+        <property name="text">
+         <string>Clear</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>230</y>
+       <width>331</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>Saving to File</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="fileNameWindow">
+        <property name="styleSheet">
+         <string notr="true">QLineEdit { 
+background: rgb(245, 245, 245); 
+}</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QPushButton" name="selectTimeButton">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>200</y>
+       <width>75</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Select Time</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="avgTimeWindow">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>201</y>
+       <width>161</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit { 
+background: rgb(245, 245, 245); 
+}</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>201</y>
+       <width>74</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Averaging Time</string>
+     </property>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>101</x>
+       <y>260</y>
+       <width>261</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="defaultFilename">
+        <property name="text">
+         <string>Auto-Filename</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="selectFolderButton">
+        <property name="text">
+         <string>Change Folder</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="selectFileButton">
+        <property name="text">
+         <string>Advanced</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <zorder>selectTimeButton</zorder>
+    <zorder>avgTimeWindow</zorder>
     <zorder>layoutWidget</zorder>
-    <zorder></zorder>
+    <zorder>layoutWidget</zorder>
+    <zorder>layoutWidget</zorder>
+    <zorder>layoutWidget</zorder>
+    <zorder>layoutWidget</zorder>
     <zorder>groupBox_2</zorder>
-    <zorder></zorder>
+    <zorder>layoutWidget</zorder>
+    <zorder>label_6</zorder>
    </widget>
    <widget class="QGroupBox" name="groupBox_4">
     <property name="geometry">
      <rect>
-      <x>410</x>
+      <x>420</x>
       <y>170</y>
-      <width>281</width>
+      <width>271</width>
       <height>81</height>
      </rect>
     </property>
@@ -406,7 +487,7 @@ QGroupBox::title {
       <rect>
        <x>20</x>
        <y>30</y>
-       <width>241</width>
+       <width>231</width>
        <height>25</height>
       </rect>
      </property>
@@ -444,10 +525,10 @@ QGroupBox::title {
    <widget class="QGroupBox" name="groupBox_5">
     <property name="geometry">
      <rect>
-      <x>410</x>
+      <x>420</x>
       <y>280</y>
-      <width>281</width>
-      <height>201</height>
+      <width>271</width>
+      <height>211</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -464,36 +545,13 @@ QGroupBox::title {
 }</string>
     </property>
     <property name="title">
-     <string>Most Recent Data</string>
+     <string>Session Data and Notifications</string>
     </property>
-    <widget class="QLabel" name="label_5">
+    <widget class="QCheckBox" name="sensorOnBox">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>61</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Controller is </string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="controllerStatus">
-     <property name="geometry">
-      <rect>
-       <x>70</x>
-       <y>20</y>
-       <width>201</width>
-       <height>20</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="checkBox">
-     <property name="geometry">
-      <rect>
-       <x>210</x>
-       <y>50</y>
+       <x>190</x>
+       <y>70</y>
        <width>70</width>
        <height>17</height>
       </rect>
@@ -502,12 +560,12 @@ QGroupBox::title {
       <string>Sensor</string>
      </property>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>100</x>
-       <y>70</y>
-       <width>81</width>
+       <x>60</x>
+       <y>80</y>
+       <width>121</width>
        <height>101</height>
       </rect>
      </property>
@@ -525,7 +583,13 @@ QGroupBox::title {
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_10"/>
+         <widget class="QLineEdit" name="field4Meas">
+          <property name="styleSheet">
+           <string notr="true">QLineEdit { 
+background: rgb(245, 245, 245); 
+}</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -542,90 +606,120 @@ QGroupBox::title {
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_12"/>
+         <widget class="QLineEdit" name="field5Meas">
+          <property name="styleSheet">
+           <string notr="true">QLineEdit { 
+background: rgb(245, 245, 245); 
+}</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>70</y>
-       <width>71</width>
-       <height>101</height>
-      </rect>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_11">
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout_6">
-        <item>
-         <widget class="QLabel" name="label_8">
-          <property name="text">
-           <string>Field 4</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="lineEdit_9"/>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout_8">
-        <item>
-         <widget class="QLabel" name="label_11">
-          <property name="text">
-           <string>Field 5</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="lineEdit_11"/>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>190</x>
-       <y>80</y>
+       <y>100</y>
        <width>71</width>
        <height>91</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_12">
       <item>
-       <widget class="QCheckBox" name="checkBox_2">
+       <widget class="QCheckBox" name="leftReceivingBox">
         <property name="text">
          <string>Receiving</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QCheckBox" name="checkBox_3">
+       <widget class="QCheckBox" name="dataSavingBox">
         <property name="text">
          <string>Saving</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QCheckBox" name="checkBox_4">
+       <widget class="QCheckBox" name="rightReceivingBox">
         <property name="text">
          <string>Receiving</string>
         </property>
        </widget>
       </item>
      </layout>
+    </widget>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>29</x>
+       <y>100</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Left</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>231</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_6">
+      <item>
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Controller is </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="controllerStatus">
+        <property name="styleSheet">
+         <string notr="true">QLineEdit { 
+background: rgb(245, 245, 245); 
+}</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>150</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Right</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
    </widget>
    <widget class="QPushButton" name="exitButton">
@@ -642,9 +736,15 @@ QGroupBox::title {
     </property>
    </widget>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QStatusBar" name="statusBar">
+   <property name="sizeGripEnabled">
+    <bool>false</bool>
+   </property>
+  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

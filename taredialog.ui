@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Tare Window</string>
   </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
@@ -25,7 +25,7 @@
    <property name="title">
     <string>Select Load Cell</string>
    </property>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -36,14 +36,14 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QRadioButton" name="radioButton">
+      <widget class="QRadioButton" name="LeftLCButton">
        <property name="text">
         <string>Left Loadcell</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="radioButton_2">
+      <widget class="QRadioButton" name="RightLCButton">
        <property name="text">
         <string>Right Loadcell</string>
        </property>
@@ -65,7 +65,7 @@
     <string>Exit</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="tareButton">
    <property name="geometry">
     <rect>
      <x>50</x>
