@@ -210,7 +210,7 @@ background: rgb(245, 245, 245);
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>100</x>
@@ -249,7 +249,7 @@ background: rgb(245, 245, 245);
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>36</x>
@@ -314,7 +314,7 @@ background: rgb(245, 245, 245);
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>280</x>
@@ -340,7 +340,7 @@ background: rgb(245, 245, 245);
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>30</x>
@@ -409,7 +409,7 @@ background: rgb(245, 245, 245);
       <string>Averaging Time</string>
      </property>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>101</x>
@@ -442,17 +442,16 @@ background: rgb(245, 245, 245);
       </item>
      </layout>
     </widget>
+    <zorder>selectTimeButton</zorder>
+    <zorder>avgTimeWindow</zorder>
+    <zorder>layoutWidget</zorder>
     <zorder>layoutWidget</zorder>
     <zorder>layoutWidget</zorder>
     <zorder>layoutWidget</zorder>
     <zorder>layoutWidget</zorder>
     <zorder>groupBox_2</zorder>
     <zorder>layoutWidget</zorder>
-    <zorder>option2Line</zorder>
-    <zorder>label_13</zorder>
     <zorder>label_6</zorder>
-    <zorder>defaultFilename</zorder>
-    <zorder>selectFolderButton</zorder>
    </widget>
    <widget class="QGroupBox" name="groupBox_4">
     <property name="geometry">
@@ -542,7 +541,7 @@ QGroupBox::title {
 }</string>
     </property>
     <property name="title">
-     <string>Most Recent Data</string>
+     <string>Session Data and Notifications</string>
     </property>
     <widget class="QCheckBox" name="sensorOnBox">
      <property name="geometry">
@@ -669,7 +668,7 @@ background: rgb(245, 245, 245);
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>20</x>

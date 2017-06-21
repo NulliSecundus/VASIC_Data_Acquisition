@@ -14,6 +14,7 @@
 #include <QScrollArea>
 #include <QtSerialPort/QSerialPortInfo>
 #include <QDateTime>
+#include <QFile>
 
 namespace Ui {
 class MainWindow;
@@ -103,6 +104,7 @@ private:
     QString option2;
     QString fileExtension;
     QString directory;
+    QFile data;
     void closeSerialPort();
     void writeData(const QByteArray &data);
     void toWrite(const QByteArray &data);

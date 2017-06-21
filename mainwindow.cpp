@@ -340,7 +340,6 @@ void MainWindow::on_selectFileButton_clicked()
 
 void MainWindow::on_defaultFilename_clicked()
 {
-    directory = "/";
     autoFileName();
     ui->fileNameWindow->setText(directory + filename);
 }
@@ -400,56 +399,58 @@ void MainWindow::on_radioButton_4_toggled(bool checked)
 void MainWindow::on_selectFolderButton_clicked()
 {
     directory = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "/home", QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+    directory = directory + "/";
     autoFileName();
-    ui->fileNameWindow->setText(directory + "/" + filename);
+    ui->fileNameWindow->setText(directory + filename);
 }
 
 void MainWindow::writeStartSession()
 {
-    QFile data(filename);
+    data.setFileName(directory + filename);
     if (data.open(QIODevice::WriteOnly| QIODevice::Truncate)) {
         QTextStream out(&data);
         out << "Time" << "," << "break" << "," << "Start/Stop" << "," << "TimeStamp" << "," << "break" << "," << "Left" << "," << "break" << "," << "Right" << "," << "Duration" << "\n";
         out << time.currentDateTime().time().toString() << "," << "*****" <<  "," << "Started Session" << "," << "*****" << "\n";
+        data.close();
     }
 }
 
 void MainWindow::writeSensorBroken()
 {
     timePrev = QDateTime::currentDateTime();
-    QFile data(filename);
     if (data.open(QIODevice::ReadWrite| QIODevice::Append)) {
         QTextStream out(&data);
         out << time.currentDateTime().time().toString() << "," << "*****" <<  "," << "Sensor Broken" << "," << "*****" << "\n";
+        data.close();
     }
 }
 
 void MainWindow::writeSensorMade()
 {
-    QFile data(filename);
     if (data.open(QIODevice::ReadWrite| QIODevice::Append)) {
         QTextStream out(&data);
         out << time.currentDateTime().time().toString() << "," << "*****" <<  "," << "Sensor Made" << "," << "*****" << "\n";
+        data.close();
     }
 }
 
 void MainWindow::writeStopSession()
 {
-    QFile data(filename);
     if (data.open(QIODevice::ReadWrite| QIODevice::Append)) {
         QTextStream out(&data);
         out << time.currentDateTime().time().toString() << "," << "*****" <<  "," << "Stopped Session" << "," << "*****" << "\n";
+        data.close();
     }
 }
 
 void MainWindow::writeDataToFile(QByteArray left, QByteArray right)
 {
-    QFile data(filename);
     if (data.open(QIODevice::ReadWrite| QIODevice::Append)) {
         QTextStream out(&data);
         timeCur = QDateTime::currentDateTime();
         qint64 ref = timePrev.msecsTo(timeCur);
         double refSec = double(ref) / double(1000);
         out << "," << "," << "," << time.currentDateTime().time().toString() << "," << "," << left << "," << "," << right << "," << refSec << "\n";
+        data.close();
     }
 }
