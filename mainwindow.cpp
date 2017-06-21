@@ -135,8 +135,7 @@ void MainWindow::processData(QByteArray data, QString mode){
         if(QString(data).compare("g") == 0){
             QMessageBox::information(timeSelect, "Success", "Time Mode Set");
         }
-    }
-    if(mode.compare("collectionMode") == 0){
+    }else if(mode.compare("collectionMode") == 0){
         if(data[0] == 'L'){
             procData = data;
         }else if(data[0] == 'V'){
@@ -168,6 +167,12 @@ void MainWindow::processData(QByteArray data, QString mode){
         }
         else{
             procData.append(data);
+        }
+    }else if(mode.compare("tareMode") == 0){
+        if(data[0] == 'a'){
+            QMessageBox::information(t, tr("Success"), "Left Side Tared");
+        }else if(data[0] == 'b'){
+            QMessageBox::information(t, tr("Success"), "Right Side Tared");
         }
     }
 }
@@ -318,7 +323,11 @@ void MainWindow::onAvgTimeClose()
 
 void MainWindow::on_sessionStartButton_clicked()
 {
-    writeData("*M//");
+    if(serial->isWritable()){
+        writeData("*M//");
+    }else{
+        QMessageBox::critical(this, tr("Error"), "Unable to connect to device");
+    }
 }
 
 void MainWindow::on_sessionStopButton_clicked()

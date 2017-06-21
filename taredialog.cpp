@@ -27,10 +27,8 @@ void taredialog::on_tareExitButton_clicked()
 void taredialog::on_tareButton_clicked()
 {
     if(left){
-        QMessageBox::information(this, tr("Success"), "Left Side Tared");
         emit leftTareClick();
     }else if(right){
-        QMessageBox::information(this, tr("Success"), "Right Side Tared");
         emit rightTareClick();
     }else{
         //Message: please select a load cell to Tare
