@@ -30,7 +30,6 @@ MainWindow::MainWindow(QWidget *parent) :
     setWindowFlags(Qt::Window | Qt::MSWindowsFixedSizeDialogHint);
     this->statusBar()->setSizeGripEnabled(false);
     ui->controllerStatus->setReadOnly(true);
-    ui->controllerStatus->setText("Displaying Raw Data");
     ui->controllerStatus->setAlignment(Qt::AlignCenter);
     ui->usingPortDisp->setAlignment(Qt::AlignCenter);
     ui->usingPortDisp->setReadOnly(true);
@@ -141,22 +140,30 @@ void MainWindow::processData(QByteArray data, QString mode){
         if(data[0] == 'L'){
             procData = data;
         }else if(data[0] == 'V'){
+            ui->sensorOnBox->setChecked(true);
             writeSensorBroken();
         }else if(data[0] == 'W'){
+            ui->sensorOnBox->setChecked(false);
+            ui->leftReceivingBox->setChecked(false);
+            ui->rightReceivingBox->setChecked(false);
+            ui->dataSavingBox->setChecked(false);
+            ui->controllerStatus->clear();
             writeSensorMade();
         }else if(data[data.length()-1] == '\r'){
             procData.append(data);
-            //            qDebug() << procData;
             if(procData.contains('L') && procData.contains('R')){
                 splitProc = procData.split('\r');
                 if(splitProc.length() >= 2){
                     QByteArray leftData = splitProc.at(0);
                     QByteArray rightData = splitProc.at(1);
+                    ui->leftReceivingBox->setChecked(true);
+                    ui->rightReceivingBox->setChecked(true);
+                    ui->dataSavingBox->setChecked(true);
+                    ui->controllerStatus->setText("Averaging and Saving Data");
                     ui->field4Meas->setText(leftData.remove(0, 1));
                     ui->field5Meas->setText(rightData.remove(0,1));
                     writeDataToFile(leftData, rightData);
                 }
-                //                qDebug() << splitProc;
             }
         }
         else{
