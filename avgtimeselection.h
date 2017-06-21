@@ -24,6 +24,7 @@ private slots:
 
     void on_sendButton_clicked();
 
+    void on_defaultButton_clicked();
 
 private:
     Ui::AvgTimeSelection *ui;

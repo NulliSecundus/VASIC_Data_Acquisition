@@ -50,3 +50,10 @@ void AvgTimeSelection::on_sendButton_clicked()
 {
     emit avgTimeSelected(avgTime, avgTimeText);
 }
+
+void AvgTimeSelection::on_defaultButton_clicked()
+{
+    avgTimeText = "1.0 Second";
+    avgTime = 1;
+    ui->AvgTimeComboBox->setCurrentIndex(1);
+}

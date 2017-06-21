@@ -429,7 +429,7 @@ background: rgb(245, 245, 245);
       <item>
        <widget class="QPushButton" name="selectFolderButton">
         <property name="text">
-         <string>Select Folder</string>
+         <string>Change Folder</string>
         </property>
        </widget>
       </item>
