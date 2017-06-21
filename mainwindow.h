@@ -84,6 +84,8 @@ private:
     CalibrationWindow *calibrateWindow;
     SettingsDialog *selectPort;
     QDateTime time;
+    QDateTime timePrev;
+    QDateTime timeCur;
     QFont font;
     AvgTimeSelection *timeSelect;
     QByteArray procData;

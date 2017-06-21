@@ -402,12 +402,14 @@ void MainWindow::writeStartSession()
     QFile data(filename);
     if (data.open(QIODevice::WriteOnly| QIODevice::Truncate)) {
         QTextStream out(&data);
+        out << "Time" << "," << "break" << "," << "Start/Stop" << "," << "TimeStamp" << "," << "break" << "," << "Left" << "," << "break" << "," << "Right" << "," << "Duration" << "\n";
         out << time.currentDateTime().time().toString() << "," << "*****" <<  "," << "Started Session" << "," << "*****" << "\n";
     }
 }
 
 void MainWindow::writeSensorBroken()
 {
+    timePrev = QDateTime::currentDateTime();
     QFile data(filename);
     if (data.open(QIODevice::ReadWrite| QIODevice::Append)) {
         QTextStream out(&data);
@@ -438,7 +440,9 @@ void MainWindow::writeDataToFile(QByteArray left, QByteArray right)
     QFile data(filename);
     if (data.open(QIODevice::ReadWrite| QIODevice::Append)) {
         QTextStream out(&data);
-        //TODO: add in ref time
-        out << "," << "," << "," << time.currentDateTime().time().toString() << "," << "," << left << "," << "," << right << "\n";
+        timeCur = QDateTime::currentDateTime();
+        qint64 ref = timePrev.msecsTo(timeCur);
+        double refSec = double(ref) / double(1000);
+        out << "," << "," << "," << time.currentDateTime().time().toString() << "," << "," << left << "," << "," << right << "," << refSec << "\n";
     }
 }
