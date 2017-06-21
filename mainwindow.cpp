@@ -17,7 +17,8 @@
 #include <QFileDialog>
 #include <QFile>
 #include <QTextStream>
-
+#include <QWindow>
+#include <QIcon>
 #include <QDebug>
 
 QT_USE_NAMESPACE
@@ -29,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowFlags(Qt::Window | Qt::MSWindowsFixedSizeDialogHint);
     this->statusBar()->setSizeGripEnabled(false);
+
     ui->controllerStatus->setReadOnly(true);
     ui->controllerStatus->setAlignment(Qt::AlignCenter);
     ui->usingPortDisp->setAlignment(Qt::AlignCenter);
@@ -122,6 +124,7 @@ void MainWindow::readData()
     }else if(s.compare("m") == 0){
         mode = "collectionMode";
         QMessageBox::information(this, "Success", "Controller responded OK");
+        ui->controllerStatus->setText("Session Started");
         writeStartSession();
     }else if(s.compare("k") == 0){
         mode = "main";
@@ -140,13 +143,14 @@ void MainWindow::processData(QByteArray data, QString mode){
             procData = data;
         }else if(data[0] == 'V'){
             ui->sensorOnBox->setChecked(true);
+            ui->controllerStatus->setText("Sensor Broken");
             writeSensorBroken();
         }else if(data[0] == 'W'){
             ui->sensorOnBox->setChecked(false);
             ui->leftReceivingBox->setChecked(false);
             ui->rightReceivingBox->setChecked(false);
             ui->dataSavingBox->setChecked(false);
-            ui->controllerStatus->clear();
+            ui->controllerStatus->setText("Waiting for Sensor Break");
             writeSensorMade();
         }else if(data[data.length()-1] == '\r'){
             procData.append(data);
@@ -323,16 +327,24 @@ void MainWindow::onAvgTimeClose()
 
 void MainWindow::on_sessionStartButton_clicked()
 {
-    if(serial->isWritable()){
+    if((serial->isWritable()) && (filename.length()>0)){
         writeData("*M//");
-    }else{
+    }else if(!(serial->isWritable())){
         QMessageBox::critical(this, tr("Error"), "Unable to connect to device");
+    }else if(filename.length() == 0){
+        QMessageBox::critical(this, tr("Error"), "Please select a file to write to");
+    }else{
+        QMessageBox::critical(this, tr("Error"), "Unknown Error");
     }
 }
 
 void MainWindow::on_sessionStopButton_clicked()
 {
     writeData("*K//");
+    mode = "main";
+    ui->controllerStatus->setText("Session Ended");
+    ui->field4Meas->clear();
+    ui->field5Meas->clear();
     writeStopSession();
 }
 
@@ -340,9 +352,11 @@ void MainWindow::on_selectFileButton_clicked()
 {
     if(ui->radioButton_3->isChecked()){
         filename = QFileDialog::getSaveFileName(this, tr("Save File"), QString(), tr("Text Files (*.txt)"));
+        directory.clear();
         ui->fileNameWindow->setText(filename);
     }else{
         filename = QFileDialog::getSaveFileName(this, tr("Save File"), QString(), tr("CSV Files (*.csv)"));
+        directory.clear();
         ui->fileNameWindow->setText(filename);
     }
 }

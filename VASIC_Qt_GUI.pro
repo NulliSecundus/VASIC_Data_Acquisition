@@ -43,3 +43,6 @@ FORMS    += mainwindow.ui \
     taredialog.ui \
     settingsdialog.ui \
     avgtimeselection.ui
+
+RESOURCES += \
+    resources.qrc

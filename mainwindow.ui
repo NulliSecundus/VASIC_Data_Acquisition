@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Load Cell Measurement</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/qresource/icon_200x200.png</normaloff>:/qresource/icon_200x200.png</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
@@ -436,7 +440,7 @@ background: rgb(245, 245, 245);
       <item>
        <widget class="QPushButton" name="selectFileButton">
         <property name="text">
-         <string>Select File</string>
+         <string>Advanced</string>
         </property>
        </widget>
       </item>
@@ -732,9 +736,15 @@ background: rgb(245, 245, 245);
     </property>
    </widget>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QStatusBar" name="statusBar">
+   <property name="sizeGripEnabled">
+    <bool>false</bool>
+   </property>
+  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
