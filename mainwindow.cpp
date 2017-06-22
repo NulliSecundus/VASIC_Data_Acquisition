@@ -41,6 +41,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->fileNameWindow->setReadOnly(true);
     ui->field4Meas->setReadOnly(true);
     ui->field5Meas->setReadOnly(true);
+    ui->readDisp->setReadOnly(true);
 
     //setup for sensorOnBox checkbox
     ui->sensorOnBox->setChecked(false);
@@ -115,37 +116,38 @@ void MainWindow::readData()
 {
     QByteArray data = serial->readAll();
     QString s = data;
-    if(s.compare("t") == 0){
+    if(s.contains("t")){
         mode = "timeMode";
-    }else if(s.compare("z") == 0){
+    }else if(s.contains("z")){
         mode = "tareMode";
-    }else if(s.compare("p") == 0){
+    }else if(s.contains("p")){
         mode = "calibrationMode";
-    }else if(s.compare("m") == 0){
+    }else if(s.contains("m")){
         mode = "collectionMode";
         QMessageBox::information(this, "Success", "Controller responded OK");
         ui->controllerStatus->setText("Session Started");
         writeStartSession();
-    }else if(s.compare("k") == 0){
+    }else if(s.contains("k")){
         mode = "main";
         QMessageBox::information(this, "Success", "Controller responded OK");
     }
+    ui->readDisp->setText(data);
     processData(data, mode);
 }
 
 void MainWindow::processData(QByteArray data, QString mode){
     if(mode.compare("timeMode") == 0){
-        if(QString(data).compare("g") == 0){
+        if(QString(data).contains("g")){
             QMessageBox::information(timeSelect, "Success", "Time Mode Set");
         }
     }else if(mode.compare("collectionMode") == 0){
         if(data[0] == 'L'){
             procData = data;
-        }else if(data[0] == 'V'){
+        }else if(data.contains('V')){
             ui->sensorOnBox->setChecked(true);
             ui->controllerStatus->setText("Sensor Broken");
             writeSensorBroken();
-        }else if(data[0] == 'W'){
+        }else if(data.contains('W')){
             ui->sensorOnBox->setChecked(false);
             ui->leftReceivingBox->setChecked(false);
             ui->rightReceivingBox->setChecked(false);

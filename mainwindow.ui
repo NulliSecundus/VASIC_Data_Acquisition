@@ -735,6 +735,16 @@ background: rgb(245, 245, 245);
      <string>Exit</string>
     </property>
    </widget>
+   <widget class="QLineEdit" name="readDisp">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>20</y>
+      <width>191</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusBar">
    <property name="sizeGripEnabled">
