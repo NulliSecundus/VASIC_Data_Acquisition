@@ -183,7 +183,7 @@ void MainWindow::processData(QByteArray data, QString mode){
 
 void MainWindow::on_calibrateButton_clicked()
 {
-    auto toWrite = "*P//";
+    auto toWrite = "*P\\";
     if (serial->isWritable()) {
         writeData(toWrite);
         calibrateWindow->show();
@@ -195,37 +195,37 @@ void MainWindow::on_calibrateButton_clicked()
 void MainWindow::onCalibrationStart(bool left)
 {
     if(left){
-        writeData("*A//");
+        writeData("*A\\");
     }else{
-        writeData("*B//");
+        writeData("*B\\");
     }
 }
 
 void MainWindow::onCalibrationEmpty()
 {
-    writeData("*C//");
+    writeData("*C\\");
 }
 
 void MainWindow::onCalibrationTestWeight()
 {
-    writeData("*D//");
+    writeData("*D\\");
 }
 
 void MainWindow::onCalibrationComplete()
 {
-    QString toWrite = "*S" + calibrateWindow->testWeightValue + "//";
+    QString toWrite = "*S" + calibrateWindow->testWeightValue + "\\";
     writeData(toWrite.toLocal8Bit());
 }
 
 void MainWindow::onCalibrateClose()
 {
-    toWrite("*Q//");
+    toWrite("*Q\\");
     mode = "main";
 }
 
 void MainWindow::on_tareButton_clicked()
 {
-    auto toWrite = "*Z//";
+    auto toWrite = "*Z\\";
     if (serial->isWritable()) {
         writeData(toWrite);
         t->show();
@@ -236,19 +236,18 @@ void MainWindow::on_tareButton_clicked()
 
 void MainWindow::onTareClose()
 {
-    //    toWrite("*Q/");
-    writeData("*Q//");
+    writeData("*Q\\");
     mode = "main";
 }
 
 void MainWindow::onLeftTare()
 {
-    writeData("*A//");
+    writeData("*A\\");
 }
 
 void MainWindow::onRightTare()
 {
-    writeData("*B//");
+    writeData("*B\\");
 }
 
 void MainWindow::on_portSelectButton_clicked()
@@ -303,7 +302,7 @@ void MainWindow::on_updateTime_clicked()
 
 void MainWindow::on_selectTimeButton_clicked()
 {
-    auto toWrite = "*T//";
+    auto toWrite = "*T\\";
     if (serial->isWritable()) {
         writeData(toWrite);
         timeSelect->show();
@@ -314,21 +313,21 @@ void MainWindow::on_selectTimeButton_clicked()
 
 void MainWindow::onAvgTimeSelected(int time, QString text)
 {
-    QString s = "*G" + QString::number(time) + "//";
+    QString s = "*G" + QString::number(time) + "\\";
     ui->avgTimeWindow->setText(text);
     writeData(s.toLocal8Bit());
 }
 
 void MainWindow::onAvgTimeClose()
 {
-    writeData("*X//");
+    writeData("*X\\");
     mode = "main";
 }
 
 void MainWindow::on_sessionStartButton_clicked()
 {
     if((serial->isWritable()) && (filename.length()>0)){
-        writeData("*M//");
+        writeData("*M\\");
     }else if(!(serial->isWritable())){
         QMessageBox::critical(this, tr("Error"), "Unable to connect to device");
     }else if(filename.length() == 0){
@@ -340,7 +339,7 @@ void MainWindow::on_sessionStartButton_clicked()
 
 void MainWindow::on_sessionStopButton_clicked()
 {
-    writeData("*K//");
+    writeData("*K\\");
     mode = "main";
     ui->controllerStatus->setText("Session Ended");
     ui->field4Meas->clear();
