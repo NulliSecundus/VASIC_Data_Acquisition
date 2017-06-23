@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>708</width>
-    <height>522</height>
+    <width>581</width>
+    <height>452</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,9 +21,9 @@
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>60</y>
-      <width>271</width>
+      <x>340</x>
+      <y>40</y>
+      <width>231</width>
       <height>81</height>
      </rect>
     </property>
@@ -46,9 +46,9 @@ QGroupBox::title {
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>30</y>
-       <width>231</width>
+       <width>211</width>
        <height>25</height>
       </rect>
      </property>
@@ -88,8 +88,8 @@ QGroupBox::title {
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>391</width>
-      <height>481</height>
+      <width>321</width>
+      <height>421</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -111,9 +111,9 @@ QGroupBox::title {
     <widget class="QGroupBox" name="groupBox_2">
      <property name="geometry">
       <rect>
-       <x>70</x>
-       <y>310</y>
-       <width>241</width>
+       <x>60</x>
+       <y>290</y>
+       <width>251</width>
        <height>91</height>
       </rect>
      </property>
@@ -176,8 +176,8 @@ QGroupBox::title {
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>90</x>
-       <y>430</y>
+       <x>60</x>
+       <y>390</y>
        <width>201</width>
        <height>25</height>
       </rect>
@@ -217,7 +217,7 @@ background: rgb(245, 245, 245);
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>100</x>
+       <x>60</x>
        <y>20</y>
        <width>161</width>
        <height>171</height>
@@ -256,75 +256,10 @@ background: rgb(245, 245, 245);
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>36</x>
-       <y>20</y>
-       <width>51</width>
-       <height>171</height>
-      </rect>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Time:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Date:</string>
-        </property>
-        <property name="textFormat">
-         <enum>Qt::PlainText</enum>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Name:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>Option 1:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_13">
-        <property name="text">
-         <string>Option 2:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="layoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>20</y>
+       <x>230</x>
+       <y>30</y>
        <width>77</width>
-       <height>91</height>
+       <height>81</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -347,9 +282,9 @@ background: rgb(245, 245, 245);
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>10</x>
        <y>230</y>
-       <width>331</width>
+       <width>301</width>
        <height>31</height>
       </rect>
      </property>
@@ -363,6 +298,11 @@ background: rgb(245, 245, 245);
       </item>
       <item>
        <widget class="QLineEdit" name="fileNameWindow">
+        <property name="font">
+         <font>
+          <pointsize>8</pointsize>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">QLineEdit { 
 background: rgb(245, 245, 245); 
@@ -375,7 +315,7 @@ background: rgb(245, 245, 245);
     <widget class="QPushButton" name="selectTimeButton">
      <property name="geometry">
       <rect>
-       <x>280</x>
+       <x>230</x>
        <y>200</y>
        <width>75</width>
        <height>21</height>
@@ -388,9 +328,9 @@ background: rgb(245, 245, 245);
     <widget class="QLineEdit" name="avgTimeWindow">
      <property name="geometry">
       <rect>
-       <x>100</x>
+       <x>90</x>
        <y>201</y>
-       <width>161</width>
+       <width>131</width>
        <height>20</height>
       </rect>
      </property>
@@ -403,7 +343,7 @@ background: rgb(245, 245, 245);
     <widget class="QLabel" name="label_6">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>201</y>
        <width>74</width>
        <height>16</height>
@@ -416,9 +356,9 @@ background: rgb(245, 245, 245);
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>101</x>
+       <x>10</x>
        <y>260</y>
-       <width>261</width>
+       <width>301</width>
        <height>25</height>
       </rect>
      </property>
@@ -446,6 +386,89 @@ background: rgb(245, 245, 245);
       </item>
      </layout>
     </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>60</y>
+       <width>27</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Date:</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::PlainText</enum>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>30</y>
+       <width>26</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Time:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_13">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>160</y>
+       <width>51</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Option 2: </string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>126</y>
+       <width>51</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Option 1: </string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>89</y>
+       <width>51</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Name: </string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
     <zorder>selectTimeButton</zorder>
     <zorder>avgTimeWindow</zorder>
     <zorder>layoutWidget</zorder>
@@ -460,9 +483,9 @@ background: rgb(245, 245, 245);
    <widget class="QGroupBox" name="groupBox_4">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>170</y>
-      <width>271</width>
+      <x>340</x>
+      <y>130</y>
+      <width>231</width>
       <height>81</height>
      </rect>
     </property>
@@ -485,9 +508,9 @@ QGroupBox::title {
     <widget class="QWidget" name="layoutWidget_4">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>30</y>
-       <width>231</width>
+       <width>211</width>
        <height>25</height>
       </rect>
      </property>
@@ -525,9 +548,9 @@ QGroupBox::title {
    <widget class="QGroupBox" name="groupBox_5">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>280</y>
-      <width>271</width>
+      <x>340</x>
+      <y>220</y>
+      <width>231</width>
       <height>211</height>
      </rect>
     </property>
@@ -550,7 +573,7 @@ QGroupBox::title {
     <widget class="QCheckBox" name="sensorOnBox">
      <property name="geometry">
       <rect>
-       <x>190</x>
+       <x>160</x>
        <y>70</y>
        <width>70</width>
        <height>17</height>
@@ -563,9 +586,9 @@ QGroupBox::title {
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>60</x>
+       <x>40</x>
        <y>80</y>
-       <width>121</width>
+       <width>111</width>
        <height>101</height>
       </rect>
      </property>
@@ -621,7 +644,7 @@ background: rgb(245, 245, 245);
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>190</x>
+       <x>160</x>
        <y>100</y>
        <width>71</width>
        <height>91</height>
@@ -654,7 +677,7 @@ background: rgb(245, 245, 245);
     <widget class="QLabel" name="label_8">
      <property name="geometry">
       <rect>
-       <x>29</x>
+       <x>10</x>
        <y>100</y>
        <width>31</width>
        <height>31</height>
@@ -675,9 +698,9 @@ background: rgb(245, 245, 245);
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>30</y>
-       <width>231</width>
+       <width>211</width>
        <height>22</height>
       </rect>
      </property>
@@ -685,7 +708,7 @@ background: rgb(245, 245, 245);
       <item>
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>Controller is </string>
+         <string>Controller:</string>
         </property>
        </widget>
       </item>
@@ -703,9 +726,9 @@ background: rgb(245, 245, 245);
     <widget class="QLabel" name="label_11">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>150</y>
-       <width>41</width>
+       <width>31</width>
        <height>41</height>
       </rect>
      </property>
@@ -725,7 +748,7 @@ background: rgb(245, 245, 245);
    <widget class="QPushButton" name="exitButton">
     <property name="geometry">
      <rect>
-      <x>620</x>
+      <x>500</x>
       <y>10</y>
       <width>75</width>
       <height>23</height>
