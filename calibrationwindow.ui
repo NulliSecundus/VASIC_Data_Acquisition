@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Calibration Window</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/qresource/icon_200x200.png</normaloff>:/qresource/icon_200x200.png</iconset>
+  </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
@@ -234,6 +238,8 @@ QGroupBox::title {
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
