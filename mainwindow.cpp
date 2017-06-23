@@ -125,6 +125,7 @@ void MainWindow::readData()
         mode = "collectionMode";
         QMessageBox::information(this, "Success", "Controller responded OK");
         ui->controllerStatus->setText("Session Started");
+        dataRead = false;
         writeStartSession();
     }else if(s.contains("k")){
         mode = "main";
@@ -144,6 +145,7 @@ void MainWindow::processData(QByteArray data, QString mode){
         }else if(data.contains('V')){
             ui->sensorOnBox->setChecked(true);
             ui->controllerStatus->setText("Sensor Broken");
+            dataRead = true;
             writeSensorBroken();
         }else if(data.contains('W')){
             ui->sensorOnBox->setChecked(false);
@@ -151,8 +153,9 @@ void MainWindow::processData(QByteArray data, QString mode){
             ui->rightReceivingBox->setChecked(false);
             ui->dataSavingBox->setChecked(false);
             ui->controllerStatus->setText("Waiting for Sensor Break");
+            dataRead = false;
             writeSensorMade();
-        }else if(data[data.length()-1] == '\r'){
+        }else if((data[data.length()-1] == '\r') && dataRead){
             procData.append(data);
             if(procData.contains('L') && procData.contains('R')){
                 splitProc = procData.split('\r');
