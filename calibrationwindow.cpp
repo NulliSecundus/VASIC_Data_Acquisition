@@ -82,6 +82,8 @@ void CalibrationWindow::on_readEmptyWeightButton_clicked()
     if(startCalibration){
         emit emptyWeightRead();
         ui->EmptyWeightRec->setChecked(true);
+    }else{
+        QMessageBox::critical(this, tr("Error"), "Calibration not started");
     }
 }
 
@@ -90,6 +92,8 @@ void CalibrationWindow::on_readTestWeightButton_clicked()
     if(startCalibration){
         emit testWeightRead();
         ui->TestWeightRec->setChecked(true);
+    }else{
+        QMessageBox::critical(this, tr("Error"), "Calibration not started");
     }
 }
 
@@ -98,6 +102,8 @@ void CalibrationWindow::on_sendTestWeightButton_clicked()
     if(startCalibration){
         emit testWeightSent();
         ui->CalibrationComplete->setChecked(true);
+    }else{
+        QMessageBox::critical(this, tr("Error"), "Calibration not started");
     }
 }
 

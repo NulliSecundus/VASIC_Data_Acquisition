@@ -331,6 +331,7 @@ void MainWindow::on_sessionStartButton_clicked()
 {
     if((serial->isWritable()) && (filename.length()>0)){
         writeData("*M\\");
+        ui->timeLineEdit->setText(time.currentDateTime().time().toString());
     }else if(!(serial->isWritable())){
         QMessageBox::critical(this, tr("Error"), "Unable to connect to device");
     }else if(filename.length() == 0){
