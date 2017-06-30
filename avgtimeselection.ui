@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Averaging Time Selection</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/qresource/icon_200x200.png</normaloff>:/qresource/icon_200x200.png</iconset>
+  </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
@@ -76,6 +80,8 @@
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

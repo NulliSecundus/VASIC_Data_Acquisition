@@ -58,11 +58,9 @@ private slots:
     void readData();
 
     void on_sessionStartButton_clicked();
-
     void on_sessionStopButton_clicked();
 
     void on_selectFileButton_clicked();
-
     void on_defaultFilename_clicked();
 
     void on_lineEdit_3_textChanged(const QString &arg1);
@@ -105,6 +103,7 @@ private:
     QString fileExtension;
     QString directory;
     QFile data;
+    bool dataRead;
     void closeSerialPort();
     void writeData(const QByteArray &data);
     void toWrite(const QByteArray &data);
