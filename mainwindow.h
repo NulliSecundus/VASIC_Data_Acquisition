@@ -104,6 +104,7 @@ private:
     QString directory;
     QFile data;
     bool dataRead;
+    bool sessionRunning;
     void closeSerialPort();
     void writeData(const QByteArray &data);
     void toWrite(const QByteArray &data);
