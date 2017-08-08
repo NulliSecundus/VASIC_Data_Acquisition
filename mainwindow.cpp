@@ -70,6 +70,7 @@ MainWindow::MainWindow(QWidget *parent) :
     bytesToRead = 512;
     mode = "main";
     fileExtension = ".csv";
+    sessionRunning = false;
 
     time = QDateTime::currentDateTime();
     font = ui->timeLineEdit->font();
@@ -329,26 +330,36 @@ void MainWindow::onAvgTimeClose()
 
 void MainWindow::on_sessionStartButton_clicked()
 {
-    if((serial->isWritable()) && (filename.length()>0)){
-        writeData("*M\\");
-        ui->timeLineEdit->setText(time.currentDateTime().time().toString());
-    }else if(!(serial->isWritable())){
-        QMessageBox::critical(this, tr("Error"), "Unable to connect to device");
-    }else if(filename.length() == 0){
-        QMessageBox::critical(this, tr("Error"), "Please select a file to write to");
+    if(!sessionRunning){
+        if((serial->isWritable()) && (filename.length()>0)){
+            writeData("*M\\");
+            sessionRunning = true;
+            ui->timeLineEdit->setText(time.currentDateTime().time().toString());
+        }else if(!(serial->isWritable())){
+            QMessageBox::critical(this, tr("Error"), "Unable to connect to device");
+        }else if(filename.length() == 0){
+            QMessageBox::critical(this, tr("Error"), "Please select a file to write to");
+        }else{
+            QMessageBox::critical(this, tr("Error"), "Unknown Error");
+        }
     }else{
-        QMessageBox::critical(this, tr("Error"), "Unknown Error");
+        QMessageBox::critical(this, tr("Error"), "Session already running");
     }
 }
 
 void MainWindow::on_sessionStopButton_clicked()
 {
-    writeData("*K\\");
-    mode = "main";
-    ui->controllerStatus->setText("Session Ended");
-    ui->field4Meas->clear();
-    ui->field5Meas->clear();
-    writeStopSession();
+    if(sessionRunning){
+        writeData("*K\\");
+        mode = "main";
+        sessionRunning = false;
+        ui->controllerStatus->setText("Session Ended");
+        ui->field4Meas->clear();
+        ui->field5Meas->clear();
+        writeStopSession();
+    }else{
+        QMessageBox::critical(this, tr("Error"), "No current session running");
+    }
 }
 
 void MainWindow::on_selectFileButton_clicked()
@@ -433,7 +444,7 @@ void MainWindow::on_selectFolderButton_clicked()
 void MainWindow::writeStartSession()
 {
     data.setFileName(directory + filename);
-    if (data.open(QIODevice::WriteOnly| QIODevice::Truncate)) {
+    if (data.open(QIODevice::ReadWrite| QIODevice::Append)) {
         QTextStream out(&data);
         out << "Time" << "," << "break" << "," << "Start/Stop" << "," << "TimeStamp" << "," << "break" << "," << "Left" << "," << "break" << "," << "Right" << "," << "Duration" << "\n";
         out << time.currentDateTime().time().toString() << "," << "*****" <<  "," << "Started Session" << "," << "*****" << "\n";
