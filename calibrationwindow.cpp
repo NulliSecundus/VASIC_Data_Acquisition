@@ -37,6 +37,7 @@ CalibrationWindow::CalibrationWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowFlags(Qt::Window | Qt::MSWindowsFixedSizeDialogHint);
+    setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint);
 
     left = false;
     right = false;

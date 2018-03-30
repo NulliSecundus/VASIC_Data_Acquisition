@@ -37,6 +37,7 @@ AvgTimeSelection::AvgTimeSelection(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowFlags(Qt::Window | Qt::MSWindowsFixedSizeDialogHint);
+    setWindowFlags(Qt::WindowTitleHint | Qt::WindowMinimizeButtonHint);
 
     ui->AvgTimeComboBox->insertItem(0,"0.5 Second");
     ui->AvgTimeComboBox->insertItem(1,"1.0 Second");
